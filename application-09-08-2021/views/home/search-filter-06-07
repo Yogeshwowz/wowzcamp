@@ -1,0 +1,58 @@
+   <div class="container">
+        <div class="row">
+            <div class="i-group">
+                <label>Location</label>
+                <!--<input class="form-control" type="search" placeholder="Search" aria-label="Search">-->
+				<select id="locationid" class="form-control main-select search-filter1 " name="location">
+                    <option value="">Search</option>
+						<?php foreach($city as $city){?>
+						<option value="<?php echo $city->id;?>"  ><?php echo $city->name;?></option>
+						<?php } ?>
+                </select>
+            </div>
+            <div class="i-group">
+                <label>Check In:</label>
+                <input class="date-input form-control"  name="check_in" id="check_in">
+            </div>
+            <div class="i-group">
+                <label>Check Out:</label>
+                <input class="date-input form-control" name="check_out" id="check_out">
+				<span id="date-error" class="date-error hidecls">Check-out date is less than from check-in date</span>
+            </div>
+            <div class="i-group">
+                <label>Guests</label>
+                <div class="menu-select guest-drop" id="guest_div">
+                    <span id="guest_span">1</span> Guests
+                </div>
+                <div class="guest-option">
+    				<div class="field_wrapper">
+        				<div class="row main-div m-0" id="add_more_div_1" rel="1">
+            				<div class="col-md-12 d-flex room_list">
+                                <div class="g-group adults mr-3">
+                                    <label>Adults(12+ yr)</label>
+                                    <div class="number">
+                                        <span class="minus">-</span>
+                                        <input type="text"  class="adultstext" name="adults[]" value="1"/>
+                                        <span class="plus plusmore">+</span>
+                                    </div>
+                                </div>
+                                <div class="g-group children">
+                                    <label>Children (0-12 yr)</label>
+                                    <div class="number">
+                                        <span class="minus-children">-</span>
+                                        <input type="text"     name="children[]" value="0"/>
+                                        <span class="plus-children">+</span>
+                                    </div>
+                                </div>
+                            </div>
+            				<div class="col-md-12 py-3">
+            					<a href="javascript:void(0);" class="add_button" title="Add field"><i class="fas fa-plus"></i> Add Room</a>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+			<input type="hidden"  id="search-by-filter" name="search-by-filter" value="0"/>			
+            <button class="btn main-btn my-2 my-sm-0 search-by-filter" type="button" >Search</button>
+        </div>
+    </div>

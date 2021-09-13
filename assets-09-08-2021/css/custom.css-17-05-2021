@@ -1,0 +1,37 @@
+#add-admin-form-success,#my_stock_form_success,#order-count {display:none;}
+#add-admin-form-warning,#add-theme-year-form-success,#add-location-form-success,#add-truck-form-success {display:none;}
+
+#my_admin_form,#my_orders_form {width: 100%;}
+.navbar-expand .navbar-nav {justify-content: flex-end;width: 100%;}
+.header {min-height: calc(100vh - 206px);}
+.delete-admin-user,.change-status,.delete-category,.delete-eventtype,.delete-orders { cursor: pointer;}
+table.dataTable tbody>tr.selected {background-color: #ffffff;}
+table.dataTable tbody tr.selected, table.dataTable tbody th.selected, table.dataTable tbody td.selected {color: #525f7f;}
+.select-info {display: none;}
+.delete-admin-user:hover {color: #ca2b2b;}
+.change-status:hover {color: #30e211;}
+.inner-active {color:#11cdef !important;}
+#my_staff_user_form {width: 100%;}
+#my_profile_form {width: 100%;}
+.aeditclass { color: #525f7f;}
+#my_category_form { width: 100%;}
+#my_event_type_form { width: 100%;}
+#my_stock_form { width: 100%;}
+.com-cls-8{float:left;}
+.com-cls-4{float:left;margin-top: 34px;}
+.active-show {display:none;}
+.add-more-cls {cursor: pointer;}
+
+.modal .modal-header {background: #5e72e4;}
+.modal .modal-header h6 {color:#fff;line-height: unset;}
+.modal-header .close span {color: #fff !important;}
+.by-default-hide,.count-class-hide{display:none;}
+
+.form-control-label {
+   font-size: 13px;
+}
+.total-right{padding: 0px 0 0 188px;}
+.pt-2 {
+    padding-top: 0.2rem!important;
+}
+

@@ -1,0 +1,218 @@
+<style>.avatar {
+    font-size: 1rem;
+    display: inline-flex;
+    width: 48px;
+    height: 48px;
+    color: #fff;
+    border-radius: .375rem;
+    background-color: #adb5bd;
+    align-items: center;
+    justify-content: center;
+}</style>
+<section class="h-banner">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        </ol>
+        <div class="carousel-inner">
+		<?php foreach($banner as $key=>$banner){
+			if($key==0){ $class ="active"; }else{ $class =""; }
+			?>
+        <div class="carousel-item  <?php echo $class;?>">
+            <img src="<?php echo base_url();?>assets/upload/banner/<?php echo $banner->banner_image;?>" alt="">
+        </div><?php 
+		}?>
+		
+        </div>
+        <div class="carousel-caption d-none d-md-flex">
+            <div class="header-search">
+                <div class="row">
+                    <div class="i-group">
+                        <label>Location</label>
+                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                    </div>
+                    <div class="i-group">
+                        <label>Check In:</label>
+                        <input class="date-input form-control" name="from">
+                    </div>
+                    <div class="i-group">
+                        <label>Check Out:</label>
+                        <input class="date-input form-control" name="to">
+                    </div>
+                    <div class="i-group">
+                        <label>Guests</label>
+                        <div class="menu-select guest-drop">
+                            Guests
+                        </div>
+                        <div class="guest-option">
+                            <div class="g-group">
+                                <label>Adults(12+ yr)</label>
+                                <div class="number">
+                                    <span class="minus">-</span>
+                                    <input type="text" value="1"/>
+                                    <span class="plus">+</span>
+                                </div>
+                            </div>
+                            <div class="g-group">
+                                <label>Children</label>
+                                <div class="number">
+                                    <span class="minus">-</span>
+                                    <input type="text" value="1"/>
+                                    <span class="plus">+</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                
+                    <button class="btn main-btn my-2 my-sm-0" type="submit">Search</button>
+                </div>
+            </div>
+            <!-- <div class="text">
+                <h3>Luxurious Rooms</h3>
+                <a href="#" class="btn main-btn br-5">Our Rooms</a>
+            </div> -->
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+    </div>
+</section>
+
+<section class="container-fluid h-wowz-stay">
+    <div class="section-title">
+        <h1 class="position-relative pb-4 mb-5">WOWz STAYS</h1>
+    </div>
+    <div class="ws-carousal">
+        <div>
+            <div class="card-s">
+                    <div class="card-image"><img src="<?php echo base_url();?>assets/front-end/img/c-rooms.jpg" alt="card one"></div>
+                    <ul class="social-icons">
+                        <li><a href="room-list.html"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M361.155 91.245l-18 .193.42 38.98c-45.773 13.285-108.533 19.738-166.474 23.573 35.097 96.284 99.357 173.77 157.845 257.13 20.718-19.655 51.11-31.983 83.46-36.01-20.8-18.109-36.634-27.966-58.833-70.438 31.27 37.085 52.579 48.467 77.623 62.006 3.263-13.094 8.938-24.638 18.721-32.674 8.667-7.12 20.026-10.654 33.53-10.344-46.874-59.763-101.67-117.054-127.83-189.435l-.462-42.98zM163.25 102.92l-17.998.244s.25 18.34.56 36.97c.156 9.316.325 18.703.489 25.929.06 2.636.117 4.58.174 6.542-34.378 83.733-69.154 160.993-123.92 233.442 33.635-1.387 66.326-1.203 98.552-.041 22.263-62.617 23.346-134.855 35.627-202.006 11.417 68.562 10.566 139.445 33.483 205.83 42.962 3.082 85.69 7.198 129.35 10.926-55.67-79.151-118.213-155.037-155.118-249.365-.05-1.782-.1-3.396-.152-5.737-.162-7.156-.333-16.523-.488-25.82-.31-18.594-.559-36.914-.559-36.914z"></path></svg></a></li>
+                    </ul>
+                    <div class="details">
+                        <h2>Rooms</h2>
+                        <p class="job-title">Need short content as per the white space area width.</p>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="card-s">
+                    <div class="card-image"><img src="<?php echo base_url();?>assets/front-end/img/c-rooms.jpg" alt="card one"></div>
+                    <ul class="social-icons">
+                        <li><a href="#"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M361.155 91.245l-18 .193.42 38.98c-45.773 13.285-108.533 19.738-166.474 23.573 35.097 96.284 99.357 173.77 157.845 257.13 20.718-19.655 51.11-31.983 83.46-36.01-20.8-18.109-36.634-27.966-58.833-70.438 31.27 37.085 52.579 48.467 77.623 62.006 3.263-13.094 8.938-24.638 18.721-32.674 8.667-7.12 20.026-10.654 33.53-10.344-46.874-59.763-101.67-117.054-127.83-189.435l-.462-42.98zM163.25 102.92l-17.998.244s.25 18.34.56 36.97c.156 9.316.325 18.703.489 25.929.06 2.636.117 4.58.174 6.542-34.378 83.733-69.154 160.993-123.92 233.442 33.635-1.387 66.326-1.203 98.552-.041 22.263-62.617 23.346-134.855 35.627-202.006 11.417 68.562 10.566 139.445 33.483 205.83 42.962 3.082 85.69 7.198 129.35 10.926-55.67-79.151-118.213-155.037-155.118-249.365-.05-1.782-.1-3.396-.152-5.737-.162-7.156-.333-16.523-.488-25.82-.31-18.594-.559-36.914-.559-36.914z"></path></svg></a></li>
+                    </ul>
+                    <div class="details">
+                        <h2>Rooms</h2>
+                        <p class="job-title">Need short content as per the white space area width.</p>
+                </div>
+            </div>
+        </div><div>
+            <div class="card-s">
+                    <div class="card-image"><img src="<?php echo base_url();?>assets/front-end/img/c-rooms.jpg" alt="card one"></div>
+                    <ul class="social-icons">
+                        <li><a href="#"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M361.155 91.245l-18 .193.42 38.98c-45.773 13.285-108.533 19.738-166.474 23.573 35.097 96.284 99.357 173.77 157.845 257.13 20.718-19.655 51.11-31.983 83.46-36.01-20.8-18.109-36.634-27.966-58.833-70.438 31.27 37.085 52.579 48.467 77.623 62.006 3.263-13.094 8.938-24.638 18.721-32.674 8.667-7.12 20.026-10.654 33.53-10.344-46.874-59.763-101.67-117.054-127.83-189.435l-.462-42.98zM163.25 102.92l-17.998.244s.25 18.34.56 36.97c.156 9.316.325 18.703.489 25.929.06 2.636.117 4.58.174 6.542-34.378 83.733-69.154 160.993-123.92 233.442 33.635-1.387 66.326-1.203 98.552-.041 22.263-62.617 23.346-134.855 35.627-202.006 11.417 68.562 10.566 139.445 33.483 205.83 42.962 3.082 85.69 7.198 129.35 10.926-55.67-79.151-118.213-155.037-155.118-249.365-.05-1.782-.1-3.396-.152-5.737-.162-7.156-.333-16.523-.488-25.82-.31-18.594-.559-36.914-.559-36.914z"></path></svg></a></li>
+                    </ul>
+                    <div class="details">
+                        <h2>Rooms</h2>
+                        <p class="job-title">Need short content as per the white space area width.</p>
+                </div>
+            </div>
+        </div><div>
+            <div class="card-s">
+                    <div class="card-image"><img src="<?php echo base_url();?>assets/front-end/img/c-rooms.jpg" alt="card one"></div>
+                    <ul class="social-icons">
+                        <li><a href="#"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M361.155 91.245l-18 .193.42 38.98c-45.773 13.285-108.533 19.738-166.474 23.573 35.097 96.284 99.357 173.77 157.845 257.13 20.718-19.655 51.11-31.983 83.46-36.01-20.8-18.109-36.634-27.966-58.833-70.438 31.27 37.085 52.579 48.467 77.623 62.006 3.263-13.094 8.938-24.638 18.721-32.674 8.667-7.12 20.026-10.654 33.53-10.344-46.874-59.763-101.67-117.054-127.83-189.435l-.462-42.98zM163.25 102.92l-17.998.244s.25 18.34.56 36.97c.156 9.316.325 18.703.489 25.929.06 2.636.117 4.58.174 6.542-34.378 83.733-69.154 160.993-123.92 233.442 33.635-1.387 66.326-1.203 98.552-.041 22.263-62.617 23.346-134.855 35.627-202.006 11.417 68.562 10.566 139.445 33.483 205.83 42.962 3.082 85.69 7.198 129.35 10.926-55.67-79.151-118.213-155.037-155.118-249.365-.05-1.782-.1-3.396-.152-5.737-.162-7.156-.333-16.523-.488-25.82-.31-18.594-.559-36.914-.559-36.914z"></path></svg></a></li>
+                    </ul>
+                    <div class="details">
+                        <h2>Rooms</h2>
+                        <p class="job-title">Need short content as per the white space area width.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="h-about-us">
+    <div class="row m-0">
+        <div class="col-lg-6 about_text_main no_padding">
+            <h2>About WOWz Camps</h2>
+            <div class="descc">
+                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. 
+                      There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. </p>
+                <h5>Advantages list:</h5>
+                <ul>
+                    <li>Camping</li>
+                    <li>Outbound Learning</li>
+                    <li>Survival Skills</li>
+                    <li>Holiday in the wilderness</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-6 p-0 overflow-hidden">
+            <img class="w-100 h-100" src="<?php echo base_url();?>assets/upload/banner/<?php echo $banner->banner_image;?>" alt="">
+        </div>
+    </div>
+</section>
+
+<section class="container-fluid services">
+    <div class="section-title">
+        <h1 class="position-relative pb-4 mb-5">Our Courses &amp; Programmes</h1>
+    </div>
+    <div class="row">
+	<?php foreach($services as $result) { ?>
+        <div class="col-md-4 col-lg-3 col-12 mx-auto my-3">
+            <div class="card-services shadow-lg border-0 p-4">
+                <article class="service">
+				<!--<span class="icon_span"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M361.155 91.245l-18 .193.42 38.98c-45.773 13.285-108.533 19.738-166.474 23.573 35.097 96.284 99.357 173.77 157.845 257.13 20.718-19.655 51.11-31.983 83.46-36.01-20.8-18.109-36.634-27.966-58.833-70.438 31.27 37.085 52.579 48.467 77.623 62.006 3.263-13.094 8.938-24.638 18.721-32.674 8.667-7.12 20.026-10.654 33.53-10.344-46.874-59.763-101.67-117.054-127.83-189.435l-.462-42.98zM163.25 102.92l-17.998.244s.25 18.34.56 36.97c.156 9.316.325 18.703.489 25.929.06 2.636.117 4.58.174 6.542-34.378 83.733-69.154 160.993-123.92 233.442 33.635-1.387 66.326-1.203 98.552-.041 22.263-62.617 23.346-134.855 35.627-202.006 11.417 68.562 10.566 139.445 33.483 205.83 42.962 3.082 85.69 7.198 129.35 10.926-55.67-79.151-118.213-155.037-155.118-249.365-.05-1.782-.1-3.396-.152-5.737-.162-7.156-.333-16.523-.488-25.82-.31-18.594-.559-36.914-.559-36.914z"></path></svg></span>-->
+				
+				<img src="<?php echo base_url();?>assets/upload/service/<?php  echo $result->image; ?>" class=" avatar rounded-circle mr-3">
+                    <h6><?php if(!empty($result->title)) { echo $result->title; } ?></h6>
+                    <p class="service_p">
+                        <?php if(!empty($result->description)) { echo $result->description; } ?>
+                    </p>
+                </article>
+            </div>
+        </div><?php 
+	}?>
+        
+		</div>
+    </div>
+</section>
+
+<section class="h-galary">
+    <div class="gal-bg gal-bar">
+        <div class="section-title">
+            <h1 class="text-center position-relative pb-4 mb-5">Gallery</h1>
+        </div>
+        <div>
+            <div class="h-gallery">
+                <div><a class="fresco" data-fresco-group="unique_name" data-fresco-group-options="thumbnails: true" href="https://oxeenit.com/wowzhotel/public/uploads/properties/16185873141.jpg"><img class="image-gallery" src="https://oxeenit.com/wowzhotel/public/uploads/properties/16185873141.jpg" alt=""></a></div>
+                <div><a class="fresco" data-fresco-group="unique_name" data-fresco-group-options="thumbnails: true" href="https://oxeenit.com/wowzhotel/public/uploads/properties/16191118807.jpg"><img class="image-gallery" src="https://oxeenit.com/wowzhotel/public/uploads/properties/16191118807.jpg" alt=""></a></div>
+                <div><a class="fresco" data-fresco-group="unique_name" data-fresco-group-options="thumbnails: true" href="https://oxeenit.com/wowzhotel/public/uploads/properties/162161823929.jpg"><img class="image-gallery" src="https://oxeenit.com/wowzhotel/public/uploads/properties/162161823929.jpg" alt=""></a></div>
+                <div><a class="fresco" data-fresco-group="unique_name" data-fresco-group-options="thumbnails: true" href="https://oxeenit.com/wowzhotel/public/uploads/properties/162161836039.jpg"><img class="image-gallery" src="https://oxeenit.com/wowzhotel/public/uploads/properties/162161836039.jpg" alt=""></a></div>
+                <div><a class="fresco" data-fresco-group="unique_name" data-fresco-group-options="thumbnails: true" href="https://oxeenit.com/wowzhotel/public/uploads/properties/162177441322.jpg"><img class="image-gallery" src="https://oxeenit.com/wowzhotel/public/uploads/properties/162177441322.jpg" alt=""></a></div>
+                <div><a class="fresco" data-fresco-group="unique_name" data-fresco-group-options="thumbnails: true" href="https://oxeenit.com/wowzhotel/public/uploads/properties/162186674474.png"><img class="image-gallery" src="https://oxeenit.com/wowzhotel/public/uploads/properties/162186674474.png" alt=""></a></div>
+                <div><a class="fresco" data-fresco-group="unique_name" data-fresco-group-options="thumbnails: true" href="https://oxeenit.com/wowzhotel/public/uploads/properties/16218668148.png"><img class="image-gallery" src="https://oxeenit.com/wowzhotel/public/uploads/properties/16218668148.png" alt=""></a></div>
+                <div><a class="fresco" data-fresco-group="unique_name" data-fresco-group-options="thumbnails: true" href="https://oxeenit.com/wowzhotel/public/uploads/properties/162186690070.png"><img class="image-gallery" src="https://oxeenit.com/wowzhotel/public/uploads/properties/162186690070.png" alt=""></a></div>
+            </div>
+            <div><button class="btn m-btn">Load More</button></div>
+        </div>
+    </div>
+</section>
+
+
+<div class="fix-sm">
+    <a href="#" class="fix-sm-item item-fb">
+        <span class="item-icon"><i class="fab fa-facebook-f"></i></span><span class="item-text">Facebook</span>
+    </a>
+    <a href="#" class="fix-sm-item item-g">
+        <span class="item-icon"><i class="fab fa-google"></i></span><span class="item-text">Gmail</span>
+    </a>
+    <a href="#" class="fix-sm-item item-ld">
+        <span class="item-icon"><i class="fab fa-linkedin-in"></i></span><span class="item-text">Linkedin</span>
+    </a>
+</div>

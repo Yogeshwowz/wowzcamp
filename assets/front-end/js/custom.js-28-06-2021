@@ -1,0 +1,631 @@
+$('.ws-carousal').slick({
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    arrows: true,
+    prevArrow: '<div class="slick-prev"><i class="fa fa-angle-left" aria-hidden="true"></i></div>',
+    nextArrow: '<div class="slick-next"><i class="fa fa-angle-right" aria-hidden="true"></i></div>'
+});
+
+$(document).ready(function() {
+  var date = new Date();
+  var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+
+  $('.date-input').datepicker({
+    format: "dd/mm/yyyy",
+    todayHighlight: true,
+    startDate: today,
+    autoclose: true
+  });
+
+  $('.date-input').datepicker('setDate', today);
+});
+
+$(document).ready(function() {
+  $('.minus').click(function () {
+    var $input = $(this).parent().find('input');
+    var count = parseInt($input.val()) - 1;
+    count = count < 1 ? 1 : count;
+    $input.val(count);
+    $input.change();
+    return false;
+  });
+  $('.plus').click(function () {
+    var $input = $(this).parent().find('input');
+    $input.val(parseInt($input.val()) + 1);
+    $input.change();
+    return false;
+  });
+});
+
+var numSlick = 0;
+$('.room-listing-c').each( function() {
+  numSlick++;
+  $(this).addClass( 'slider-' + numSlick ).slick({
+    dots: false,
+    arrows: false,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    asNavFor: '.room-listing-c-thumb.slider-' + numSlick
+  });
+});
+
+numSlick = 0;
+$('.room-listing-c-thumb').each( function() {
+  numSlick++;
+  $(this).addClass( 'slider-' + numSlick ).slick({
+    dots: false,
+    arrows: true,
+    centerMode: true,
+    centerPadding: '0px',
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    focusOnSelect: true,
+    prevArrow: '<div class="slick-prev"><i class="fa fa-angle-left" aria-hidden="true"></i></div>',
+    nextArrow: '<div class="slick-next"><i class="fa fa-angle-right" aria-hidden="true"></i></div>',
+    asNavFor: '.room-listing-c.slider-' + numSlick,
+  });
+});
+
+
+$(document).ready(function() {
+var baseUrl = $('#baseURL').val();
+
+ var rangeSlider = function(){
+  var slider = $('.range-slider-p'),
+      range = $('.range-slider__range'),
+      value = $('.range-slider__value');
+    
+  slider.each(function(){
+
+    value.each(function(){
+      var value = $(this).prev().attr('value');
+      $(this).html(value);
+    });
+
+    range.on('input', function(){
+      $(this).next(value).html(this.value);
+      $('#prange').val(this.value);
+    });
+  });
+};
+
+rangeSlider();
+ 
+ $(".search-filter").change(function() { 
+ var locationid=$( "#locationid option:selected" ).text();
+ if(locationid=='Location'){
+	 $('.locspan').text('Kasauli Wilderness Camp');
+ }else{
+	  $('.locspan').text(locationid);
+ }
+ loadPaginationRecord(0);
+	
+});
+
+ $(".search-filter-radio").change(function() { 
+ var search_filter = $(this).val();
+ if(search_filter=='all'){ 
+	$('#labelall').addClass('ptyeactive');
+	$('#labelroom,#labeltent').removeClass('ptyeactive');
+ }
+ if(search_filter=='room'){ 
+    $('.protype').text('Rooms')
+	$('#labelroom').addClass('ptyeactive');
+	$('#labelall,#labeltent,#labelcottage,#labelcamping').removeClass('ptyeactive');
+ }
+ if(search_filter=='tent'){ 
+  $('.protype').text('Tents')
+	$('#labeltent').addClass('ptyeactive');
+	$('#labelall,#labelroom,#labelcottage,#labelcamping').removeClass('ptyeactive');
+ }
+  if(search_filter=='cottage'){ 
+  $('.protype').text('Cottage')
+	$('#labelcottage').addClass('ptyeactive');
+	$('#labelall,#labelroom,#labeltent,#labelcamping').removeClass('ptyeactive');
+ }
+ if(search_filter=='camping'){ 
+  $('.protype').text('Camping')
+	$('#labelcamping').addClass('ptyeactive');
+	$('#labelall,#labelroom,#labeltent,#labelcottage').removeClass('ptyeactive');
+ }
+  loadPaginationRecord(0);
+	
+});
+	$('#pagination_room_ul').on('click','a',function(e){
+				e.preventDefault(); 
+				 $(window).scrollTop(0);
+				var pageno = $(this).attr('data-ci-pagination-page');
+				$('#search-form').submit();
+			});
+	
+	
+	
+	
+	var pageURL = $(location).attr("href");
+	var rooms = baseUrl+'rooms';
+	var tents = baseUrl+'tents';
+	var cottage = baseUrl+'cottage';
+	var camping = baseUrl+'camping';
+	if(pageURL==rooms || pageURL==tents || pageURL==cottage || pageURL==camping){ 
+		loadPaginationRecord(0);
+	}
+	$('#pagination_room').on('click','a',function(e){
+				e.preventDefault(); 
+				 $(window).scrollTop(0);
+				var pageno = $(this).attr('data-ci-pagination-page');
+				loadPaginationRecord(pageno);
+			});
+			
+			// Load pagination
+			function loadPaginationRecord(pagno){
+				
+				H5_loading.show();
+				var formData = $("#search-form").serialize();
+			   $.ajax({
+					url: baseUrl+'home/loadRecordRoom/'+pagno,
+					type: 'post',
+					dataType: 'json',
+					data  :{
+						pagno :pagno,
+						formdata : formData
+					},
+					success: function(response){
+						H5_loading.hide();
+						$('#pagination_room').html(response.pagination);
+						$('.count-V').text(response.allcount);
+						createTable(response.result,response.row);
+						var numSlick = 0;
+						$('.room-listing-c').each( function() {
+						  numSlick++;
+						  $(this).addClass( 'slider-' + numSlick ).slick({
+							dots: false,
+							arrows: false,
+							slidesToShow: 1,
+							slidesToScroll: 1,
+							asNavFor: '.room-listing-c-thumb.slider-' + numSlick
+						  });
+						});
+
+						numSlick = 0;
+						$('.room-listing-c-thumb').each( function() {
+						  numSlick++;
+						  $(this).addClass( 'slider-' + numSlick ).slick({
+							dots: false,
+							arrows: true,
+							centerMode: true,
+							centerPadding: '0px',
+							slidesToShow: 5,
+							slidesToScroll: 1,
+							focusOnSelect: true,
+							prevArrow: '<div class="slick-prev"><i class="fa fa-angle-left" aria-hidden="true"></i></div>',
+							nextArrow: '<div class="slick-next"><i class="fa fa-angle-right" aria-hidden="true"></i></div>',
+							asNavFor: '.room-listing-c.slider-' + numSlick,
+						  });
+						});
+
+						}
+				});
+
+			}
+			
+			// Create table list
+			function createTable(result,sno){
+				var ptype = $("input[name='ptype']:checked").val();
+				var countTable =result.length;
+				sno = Number(sno);
+				$('#postsList').empty();
+				
+				if(countTable > 0){
+					for(index in result){
+						var id = result[index].id;
+						var property_type = result[index].property_type;
+						var hotel_name = result[index].hotel_name;
+						var price = result[index].price;
+						var after_discount_price = result[index].after_discount_price;
+						var city = result[index].city;
+						var description = result[index].description;
+						var discount = result[index].discount;
+						var rating = result[index].rating;
+						var address = result[index].address;
+						var amenities = result[index].amenities.slice(0, 3);
+						var rating_status = result[index].rating_status;
+						var galleryimage = result[index].gallery;
+						//console.log(galleryimage);
+						var pid = result[index].pid;
+						var pathurl = baseUrl+'single-details/'+ptype+'/'+pid;
+						var tr='<div class="row position-relative pb-4">\
+						<span class="bottom-line"></span>\
+                            <div class="col-lg-7 pt-4">\
+                                <div class="row">\
+                                    <div class="col-md-12">\
+                                        <div  class="room-listing-c slider">';
+            							for(gindex in galleryimage){
+            								//console.log(galleryimage[gindex].gallery_image);
+            								tr += '<div>\
+                                                <img src="'+baseUrl+'assets/upload/gallery/'+galleryimage[gindex].gallery_image+'" alt="" class="img-fluid">\
+                                            </div>';
+            							}
+            						tr += '</div>\
+                                        <div  class="room-listing-c-thumb slider">';
+            							for(gindex in galleryimage){
+                                          tr += '<div>\
+                                                <img src="'+baseUrl+'assets/upload/gallery/'+galleryimage[gindex].gallery_image+'" alt="" class="img-fluid">\
+                                            </div>';
+            								}
+            							
+            								
+                                          tr += '</div>\
+                                    </div>';
+                                 tr += '</div>';              
+                           tr += '</div>\
+                            <div class="col-lg-5 pt-4 d-flex flex-column">\
+                                <h4 class="main-color mb-0">'+hotel_name+'</h4>\
+                                <p class="pb-3">Location: '+address+'</p>\
+                                <div class="rating">\
+                                    <span class="main-btn py-1 px-2">'+rating+'<i class="fas fa-star pl-2"></i></span>\
+                                 </div>\
+                                <div class="features py-3">';
+            					for(indx in amenities){
+            						var amenity_name = amenities[indx].amenity_name;
+                                   tr += ' <span class="main-color2"><i class="fas fa-tv pr-2"></i> '+amenity_name+'</span>';
+            					}
+            						tr += ' </div>\
+                                <div class="list-des">\
+                                    <p>'+description+'</p>\
+                                </div>\
+                                <div class="listing-footer mt-auto">\
+                                    <span class="listing-price">\
+                                        <span class="cur-price main-color"><i class="fas fa-rupee-sign"></i>'+price+'</span>\
+                                        <span class="main-price px-3"><i class="fas fa-rupee-sign"></i> 3110</span>\
+                                        <span class="off-price">40% off</span>\
+                                    </span>\
+                                    <p>'+rating_status+'</p>\
+                                    <span class="d-flex justify-content-between">\
+                                        <a href="'+pathurl+'" class="btn main-btn2 my-2 my-sm-0">View Details</a>\
+                                        <a href="#" class="btn main-btn my-2 my-sm-0">BOOK NOW</a>\
+                                    </span>\
+                                  </div>\
+                            </div>\
+                        </div>\
+			           ';
+			$('#postsList').append(tr);
+		
+				}
+
+				}else{
+					var tr = '<div class="blog-one-item row">';					
+						tr += "No Data Found";
+						
+						tr += "</div>";
+						$('#postsList').append(tr);
+				}
+				
+			}
+	
+	
+	 $(document.body).on('click', '.clickgal', function() {
+		 var rel =$(this).attr('rel');
+		if(rel=='all'){ 
+			$('#all_room_div,#all_tent_div').addClass('hidecls');
+			$('#all_gallery').removeClass('hidecls');
+		 }
+		 if(rel=='tent'){ 
+			$('#all_gallery,#all_room_div').addClass('hidecls');
+			$('#all_tent_div').removeClass('hidecls');
+		 }
+		 if(rel=='room'){ 
+			$('#all_gallery,#all_tent_div').addClass('hidecls');
+			$('#all_room_div').removeClass('hidecls');
+		 }
+	 });
+	
+	
+	
+	//Load More Images
+	$(document.body).on('click', '.load-more', function() {
+		var loadMore = $('.load-more').text();
+		if(loadMore=='No More Post'){return false;}
+        var row = Number($('#row').val());
+        var allcount = Number($('#all').val());
+        var rowperpage = 3;
+        row = row + rowperpage;
+
+        if(row <= allcount){
+            $("#row").val(row);
+
+            $.ajax({
+               url: baseUrl+'home/loadMoreGallery/',
+                type: 'post',
+                data: {row:row},
+                beforeSend:function(){
+                    $(".load-more").text("Loading...");
+                },
+                success: function(response){
+					// Setting little delay while displaying new content
+                    setTimeout(function() {
+                        // appending posts after last post with class="post"
+                        $(".postcls:last").after(response).show().fadeIn("slow");
+						var rowno = row + rowperpage;
+						// checking row value is greater than allcount or not
+                        if(rowno > allcount){
+							// Change the text and background
+                            $('.load-more').text("No More Images");
+                           // $('.load-more').css("background","darkorchid");
+                        }else{
+                            $(".load-more").text("Load More");
+                        }
+                    }, 2000);
+
+                }
+            });
+        }else{
+            $('.load-more').text("Loading...");
+			setTimeout(function() {
+				// When row is greater than allcount then remove all class='post' element after 3 element
+                $('.postcls:nth-child(3)').nextAll('.postcls').remove();
+				// Reset the value of row
+                $("#row").val(0);
+				// Change the text and background
+                $('.load-more').text("Load More");
+                $('.load-more').css("background","#15a9ce");
+                
+            }, 2000);
+
+
+        }
+	});
+
+
+ $(document.body).on('click', '.load-more-room', function() {
+		var loadMore = $('.load-more-room').text();
+		if(loadMore=='No More Images'){return false;}
+        var row = Number($('#row_room').val());
+        var allcount = Number($('#all_room').val());
+        var rowperpage = 3;
+        row = row + rowperpage;
+
+        if(row <= allcount){
+            $("#row_room").val(row);
+
+            $.ajax({
+               url: baseUrl+'home/loadMoreRoomGallery/',
+                type: 'post',
+                data: {row:row},
+                beforeSend:function(){
+                    $(".load-more-room").text("Loading...");
+                },
+                success: function(response){
+					// Setting little delay while displaying new content
+                    setTimeout(function() {
+                        // appending posts after last post with class="post"
+                        $(".postroomcls:last").after(response).show().fadeIn("slow");
+						var rowno = row + rowperpage;
+						// checking row value is greater than allcount or not
+                        if(rowno > allcount){
+							// Change the text and background
+                            $('.load-more-room').text("No More Images");
+                           // $('.load-more').css("background","darkorchid");
+                        }else{
+                            $(".load-more-room").text("Load More");
+                        }
+                    }, 2000);
+
+                }
+            });
+        }else{
+            $('.load-more-room').text("Loading...");
+			setTimeout(function() {
+				// When row is greater than allcount then remove all class='post' element after 3 element
+                $('.postroomcls:nth-child(3)').nextAll('.postroomcls').remove();
+				// Reset the value of row
+                $("#row_room").val(0);
+				// Change the text and background
+                $('.load-more-room').text("Load More");
+                $('.load-more-room').css("background","#15a9ce");
+                
+            }, 2000);
+
+
+        }
+
+    });
+	$(document.body).on('click', '.load-more-tent', function() {
+		var loadMore = $('.load-more-tent').text();
+		if(loadMore=='No More Images'){return false;}
+        var row = Number($('#row_tent').val());
+        var allcount = Number($('#all_tent').val());
+        var rowperpage = 3;
+        row = row + rowperpage;
+
+        if(row <= allcount){
+            $("#row_tent").val(row);
+
+            $.ajax({
+               url: baseUrl+'home/loadMoreTentGallery/',
+                type: 'post',
+                data: {row:row},
+                beforeSend:function(){
+                    $(".load-more-tent").text("Loading...");
+                },
+                success: function(response){
+					// Setting little delay while displaying new content
+                    setTimeout(function() {
+                        // appending posts after last post with class="post"
+                        $(".posttentcls:last").after(response).show().fadeIn("slow");
+						var rowno = row + rowperpage;
+						// checking row value is greater than allcount or not
+                        if(rowno > allcount){
+							// Change the text and background
+                            $('.load-more-tent').text("No More Images");
+                           // $('.load-more').css("background","darkorchid");
+                        }else{
+                            $(".load-more-tent").text("Load More");
+                        }
+                    }, 2000);
+
+                }
+            });
+        }else{
+            $('.load-more-tent').text("Loading...");
+			setTimeout(function() {
+				// When row is greater than allcount then remove all class='post' element after 3 element
+                $('.posttentcls:nth-child(3)').nextAll('.posttentcls').remove();
+				// Reset the value of row
+                $("#row_tent").val(0);
+				// Change the text and background
+                $('.load-more-tent').text("Load More");
+                $('.load-more-tent').css("background","#15a9ce");
+                
+            }, 2000);
+
+
+        }
+
+    });
+	
+	$('body').on('click', '.more', function() {
+		var tId= $(this).attr('rel');
+		var ptag= $('#test_full_'+tId).html();
+		$('div#test_half_'+tId).addClass('complete');
+		$('div#test_full_'+tId).removeClass('complete');
+		return false;
+	});
+	$('body').on('click', '.less', function() {
+		var tId= $(this).attr('rel');
+		$('div#test_half_'+tId).removeClass('complete');
+		$('div#test_full_'+tId).addClass('complete');
+		//console.log(tId);
+		return false;
+	});
+	$('body').on('click', '#show_more_allamenity', function() {
+		$('#allamenity_more').addClass('complete-amenities');
+		$('#allamenity_less').removeClass('complete-amenities');
+		return false;
+	});
+	$('body').on('click', '#show_less_allamenity', function() {
+		$('#allamenity_more').removeClass('complete-amenities');
+		$('#allamenity_less').addClass('complete-amenities');
+		var focusElement = $('#allamenity_more'); 
+         $(focusElement).focus(); 
+		 ScrollToTop(focusElement); 
+		
+	});
+	function ScrollToTop(el, callback) { 
+		$('html, body').animate({ scrollTop: $(el).offset().top - 200 }, 'slow', callback);
+	} 
+	
+	//Single Page Pagination
+	$('#single_pagination').on('click','a',function(e){
+				e.preventDefault(); 
+				 $(window).scrollTop(0);
+				var pageno = $(this).attr('data-ci-pagination-page');
+				loadPaginationForSinglePage(pageno);
+			});
+	
+	var pageURLSingle = $(location).attr("href");
+	var resUrl = pageURLSingle.split("/");
+	if(resUrl[4]=='single-details'){ 
+		loadPaginationForSinglePage(0);
+	}
+	
+	// Load pagination
+			function loadPaginationForSinglePage(pagno){
+				H5_loading.show();
+				var formData = $("#search-form").serialize();
+			   $.ajax({
+					url: baseUrl+'home/loadRecordRoom/'+pagno,
+					type: 'post',
+					dataType: 'json',
+					data  :{
+						pagno :pagno,
+						formdata : formData
+					},
+					success: function(response){
+						H5_loading.hide();
+						$('#single_pagination').html(response.pagination);
+						$('.count-V').text(response.allcount);
+						createTableForPage(response.result,response.row);
+					}
+				});
+
+			}
+			
+			// Create table list
+			function createTableForPage(result,sno){
+				var ptype = $("input[name='ptype']").val();
+				var countTable =result.length;
+				sno = Number(sno);
+				$('#postsList').empty();
+				
+				if(countTable > 0){
+					for(index in result){
+						var id = result[index].id;
+						var property_type = result[index].property_type;
+						var hotel_name = result[index].hotel_name;
+						var price = result[index].price;
+						var after_discount_price = result[index].after_discount_price;
+						var city = result[index].city;
+						var description = result[index].description;
+						var discount = result[index].discount;
+						var rating = result[index].rating;
+						var address = result[index].address;
+						var amenities = result[index].amenities;
+						var rating_status = result[index].rating_status;
+					    
+						if(result[index].gallery[0]){
+								var galleryimage = result[index].gallery[0].gallery_image;
+						}else{
+							var galleryimage ='';
+						}
+						//console.log(galleryimage[0].gallery_image);
+						var pid = result[index].pid;
+						//var pathurl = baseUrl+'view-room/'+pid;
+						var pathurl = baseUrl+'single-details/'+ptype+'/'+pid;
+						var tr='<div class="b-1 br-5 p-3 mb-4">\
+                                            <div class="row pb-3 border-bottom">\
+                                                <div class="col-md-7">\
+                                                    <h4 class="font-weight-bold">'+hotel_name+'</h4>\
+                                                    <p>Location: '+address+'</p>\
+                                                    <div class="features py-3">';
+														for(indx in amenities){
+														var amenity_name = amenities[indx].amenity_name;
+														tr += ' <span class="main-color2"><i class="fas fa-tv pr-2"></i> '+amenity_name+'</span>';
+														}
+													tr += ' </div>\
+												</div>\
+                                                <div class="col-md-5">';
+												if(galleryimage){
+													tr += '<img src="'+baseUrl+'assets/upload/gallery/'+galleryimage+'"class="img-fluid sel-cat-img" alt="">';
+                                               }
+                                               tr +=  '</div>\
+                                            </div>\
+                                            <div class="row pt-3">\
+                                                <div class="col-md-7  d-flex align-items-center">\
+                                                    <div class="listing-price">\
+                                                        <span class="font-weight-bold">₹'+after_discount_price+'</span>\
+                                                        <span class="px-3 text-del">₹ '+price+'</span>\
+                                                    </div>\
+                                                </div>\
+                                                <div class="col-md-5 d-flex align-items-center">\
+                                                    <a href="'+pathurl+'" class="main-btn2 br-5 py-1 px-2 w-50">View Details</a>\
+                                                    <button class="main-btn br-5 py-1 px-2 w-50 ml-3">Book Now</button>\
+                                                </div>\
+                                            </div>\
+                                        </div>';
+						$('#postsList').append(tr);
+		
+				}	
+
+				}else{
+					var tr = '<div class="blog-one-item row">';					
+						tr += "No Data Found";
+						
+						tr += "</div>";
+						$('#postsList').append(tr);
+				}
+				
+			}
+	
+	
+	
+});

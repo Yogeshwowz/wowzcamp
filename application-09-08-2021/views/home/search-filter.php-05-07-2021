@@ -1,0 +1,49 @@
+   <div class="container">
+        <div class="row">
+            <div class="i-group">
+                <label>Location</label>
+                <!--<input class="form-control" type="search" placeholder="Search" aria-label="Search">-->
+				<select id="locationid" class="form-control main-select search-filter1 " name="location">
+                    <option value="">Search</option>
+						<?php foreach($city as $city){?>
+						<option value="<?php echo $city->id;?>"  ><?php echo $city->name;?></option>
+						<?php } ?>
+                </select>
+            </div>
+            <div class="i-group">
+                <label>Check In:</label>
+                <input class="date-input form-control"  name="check_in" id="check_in">
+            </div>
+            <div class="i-group">
+                <label>Check Out:</label>
+                <input class="date-input form-control" name="check_out" id="check_out">
+				<span id="date-error" class="date-error hidecls">Check-out date is less than from check-in date</span>
+            </div>
+            <div class="i-group">
+                <label>Guests</label>
+                <div class="menu-select guest-drop" id="guest_div">
+                    1 Guests
+                </div>
+                <div class="guest-option">
+                    <div class="g-group">
+                        <label>Adults(12+ yr)</label>
+                        <div class="number">
+                            <span class="minus">-</span>
+                            <input type="text" id="adults"  name="adults" value="1"/>
+                            <span class="plus">+</span>
+                        </div>
+                    </div>
+                    <div class="g-group">
+                        <label>Children</label>
+                        <div class="number">
+                            <span class="minus-children">-</span>
+                            <input type="text"  id="children"   name="children" value="0"/>
+                            <span class="plus-children">+</span>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+			<input type="hidden"  id="search-by-filter" name="search-by-filter" value="0"/>			
+            <button class="btn main-btn my-2 my-sm-0 search-by-filter" type="button" >Search</button>
+        </div>
+    </div>
